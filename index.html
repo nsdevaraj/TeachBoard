@@ -97,6 +97,7 @@
 </div>
 
 <script>
+	document.documentElement.webkitRequestFullScreen()
 var video = document.querySelector("#videoElement");
 if (navigator.mediaDevices.getUserMedia) {
   navigator.mediaDevices.getUserMedia({ video: true })
