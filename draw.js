@@ -48,34 +48,34 @@ atrament.addEventListener('strokeend', () => log('event: strokeend'));
 atrament.recordStrokes = true;
 atrament.addEventListener('strokerecorded', ({ stroke }) => {
   log(`event: strokerecorded - ${stroke.points.length} points`);
-});  
+});
 
 // utility to add delay to drawing steps
-const sleep = async time => new Promise((r) => setTimeout(r, time)); 
+const sleep = async time => new Promise((r) => setTimeout(r, time));
 
 var dataset = [];
- 
+
 
 var drag = d3.behavior.drag()
-    .on("drag", dragmove);
- 
-function handleClick(event){
-    draw(document.getElementById("myVal").value) 
-    return false
+  .on("drag", dragmove);
+
+function handleClick(event) {
+  draw(document.getElementById("myVal").value)
+  return false
 }
 
-function draw(val){
-    d3.select("body").select("ul").append("li");
-    dataset.push(val);
-    var p = d3.select("body").selectAll("li")
+function draw(val) {
+  d3.select("body").select("ul").append("li");
+  dataset.push(val);
+  var p = d3.select("body").selectAll("li")
     .data(dataset)
     .attr("id", "draggable")
-    .text(function(d,i){return d;})
-    .call(drag)  
-}
+    .text(function (d, i) { return d; })
+    .call(drag)
+} 
 
 function dragmove(d) {
-    d3.select(this)
-      .style("top", ((d3.event.sourceEvent.pageY) - this.offsetHeight/2)+"px")
-      .style("left", ((d3.event.sourceEvent.pageX) - this.offsetWidth/2)+"px")
+  d3.select(this)
+    .style("top", ((d3.event.sourceEvent.pageY) - this.offsetHeight / 2) + "px")
+    .style("left", ((d3.event.sourceEvent.pageX) - this.offsetWidth / 2) + "px")
 } 
