@@ -70,10 +70,10 @@ function draw(val) {
   var p = d3.select("body").selectAll("li")
     .data(dataset)
     .attr("id", "draggable")
-    .style("color",atrament.color)
+    .style("color", atrament.color)
     .text(function (d, i) { return d; })
     .call(drag)
-} 
+}
 
 function dragmove(d) {
   d3.select(this)
