@@ -1,134 +1,137 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Stream</title>
-    <script src="atrament.js"></script> 
-    <script defer src="draw.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.2/d3.js"></script>
-    <style>
-      
-	#draggable {
-    border: 1px solid black;
-    position: absolute;
-    display: inline-block;
-    top: 0;
-    left: 0;
-    z-index: 20;
-}
-      canvas {
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 2;
-      }
 
-      form {
-        z-index: 3;
-        position: fixed;
-        top: 300;
-        left: 100;
-        background: rgba(0, 0, 0, 0.6);
-        padding: 1em;
-        color: white;
-        width: 6rem;
-      }
+<head>
+  <meta charset="utf-8" />
+  <title>Stream</title>
+  <script src="atrament.js"></script>
+  <script defer src="draw.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.2/d3.js"></script>
+  <style>
+    #draggable {
+      border: 0px solid black;
+      position: absolute;
+      display: inline-block;
+      top: 0;
+      left: 0;
+      width: 500px;
+      z-index: 20;
+    }
 
-      textarea {
-        background: transparent;
-        color: transparent; 
-        border: 0 none;
-        width: 100%;
-        font-size: 5em;
-        outline: none;
-        height: 100%;
-        position: absolute;
-      }
+    input {
+      max-width: 40px;
+    }
 
-      textarea:focus {
-        color: white;
-      }
+    canvas {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 2;
+    }
+
+    form {
+      z-index: 3;
+      position: fixed;
+      top: 300;
+      left: 100;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 1em;
+      color: white;
+      width: 6rem;
+    }
+
+    textarea {
+      background: transparent;
+      color: transparent;
+      border: 0 none;
+      width: 100%;
+      font-size: 5em;
+      outline: none;
+      height: 100%;
+      position: absolute;
+    }
+
+    textarea:focus {
+      color: white;
+    }
+
+    form * {
+      margin-bottom: 1em;
+    }
+
+    input[type='checkbox'] {
+      margin-right: 0.5rem;
+      display: inline-block;
+    }
+
+    @media (-webkit-min-device-pixel-ratio: 1.25),
+    (min-resolution: 120dpi) {
       form * {
-        margin-bottom: 1em;
+        font-size: 1.5em;
       }
+    }
 
-      input[type='checkbox'] {
-        margin-right: 0.5rem;
-        display: inline-block;
-      }
+    .outer-container {
+      border: 0px dotted black;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
 
-      @media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
-        form * {
-          font-size: 1.5em;
-        }
-      } 
-	 .outer-container {
-	 	border: 0px dotted black;
-	 	width: 100%;
-	 	height: 100%;
-	 	text-align: center;
-	 }
-	 .inner-container {
-	 	border: 0px solid black;
-	 	width: 100%;
-	 	height: 100%;
-	 	display: inline-block;
-	 	position: relative;
-	 }
-	 .video-overlay {
-	 	position: absolute;
-	 	left: 0px;
-	 	top: 0px;
-	 	margin: 0px;
-	 	padding: 0px 0px; 
-	 }
-   link
-    {
-      color:aqua;
-      text-decoration: none; 
+    .inner-container {
+      border: 0px solid black;
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      position: relative;
+    }
+
+    .video-overlay {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      margin: 0px;
+      padding: 0px 0px;
+    }
+
+    link {
+      color: aqua;
+      text-decoration: none;
       background-color: none;
     }
-	 #videoElement {
-	 	width: 100%;
-	 	height: 100%;
-	 	opacity: 0.4;
-	 	background-color: #666;
-	 }
-	 body {
-	 	margin: 0; 
-	 	height: 100%; 
-	 	font-family: sans-serif;
-	 	padding: 0em;
-	 	overflow: hidden
-	 } 
-</style>
+
+    #videoElement {
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+      background-color: #666;
+    }
+
+    body {
+      margin: 0;
+      height: 100%;
+      font-family: sans-serif;
+      padding: 0em;
+      overflow: hidden
+    }
+  </style>
 </head>
-<body>  
-<div class="outer-container" >
-    <div class="inner-container"> <video autoplay="true" id="videoElement"/> </div>
-    <div class="video-overlay" id="container">   
+
+<body>
+  <div class="outer-container">
+    <div class="inner-container"> <video autoplay="true" id="videoElement" /> </div>
+    <div class="video-overlay" id="container">
       <form>
-        <button id="clear" onclick="event.preventDefault(); atrament.clear();">
+        <button id="clear" onclick="event.preventDefault(); var node = document.getElementById('txt'); node.innerHTML = ''; atrament.clear();">
           Del
-        </button>   
-        <input
-          id="adaptive"
-          type="checkbox"
-          onchange="atrament.adaptiveStroke = event.target.checked;"
-          checked
-          autocomplete="off"
-        /> <br /> 
-        <input
-          type="range"
-          min="1"
-          max="40"
-          oninput="atrament.weight = parseFloat(event.target.value);"
-          value="2"
-          step="0.1"
-          autocomplete="off"
-        /> <!--   <br /> 
+        </button>
+        <input id="adaptive" type="checkbox" onchange="atrament.adaptiveStroke = event.target.checked;" checked
+          autocomplete="off" /> <br />
+        <input type="range" min="1" max="40" oninput="atrament.weight = parseFloat(event.target.value);" value="2"
+          step="0.1" autocomplete="off" />
+        <!--   <br /> 
    <input
           id="smoothing"
           type="range"
@@ -138,37 +141,34 @@
           value="0.85"
           step="0.05"
           autocomplete="off"
-        /><br />-->  
+        /><br />-->
         <select onchange="atrament.mode = event.target.value;" autocomplete="off">
           <option value="draw" default>Draw</option>
           <option value="fill" default>Fill</option>
-          <option value="erase" default>Erase</option> </select
-        ><br /> 
-        <input
-          type="color"
-          onchange="atrament.color = event.target.value;"
-          value="#000000"
-          autocomplete="off"
-        /><br />   <button id="clear" onclick="event.preventDefault(); handleClick();">Text</button>
-          <input type="text" id="myVal" placeholder="text&hellip;" width="30"> 
-    </form>
-    <ul></ul>
-    <canvas id="sketcher"></canvas>
-	</div>
-</div>
+          <option value="erase" default>Erase</option>
+        </select><br />
+        <input type="color" onchange="atrament.color = event.target.value;" value="#000000" autocomplete="off" /><br />
+         <input type="text" id="myVal" placeholder="type here" width="30">         
+        <button id="clear" onclick="event.preventDefault(); handleClick();">+Text</button>
+      </form>
+      <ul id='txt'></ul>
+      <canvas id="sketcher"></canvas>
+    </div>
+  </div>
 
-<script>
-	document.documentElement.webkitRequestFullScreen()
-var video = document.querySelector("#videoElement");
-if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function (stream) {
-      video.srcObject = stream;
-    })
-    .catch(function (err0r) {
-      console.log("Something went wrong!");
-    });
-}
-</script>
+  <script>
+    document.documentElement.webkitRequestFullScreen()
+    var video = document.querySelector("#videoElement");
+    if (navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+          video.srcObject = stream;
+        })
+        .catch(function (err0r) {
+          console.log("Something went wrong!");
+        });
+    }
+  </script>
 </body>
+
 </html>
