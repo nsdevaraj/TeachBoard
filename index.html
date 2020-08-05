@@ -100,17 +100,49 @@
 <div class="outer-container" >
     <div class="inner-container"> <video autoplay="true" id="videoElement"/> </div>
     <div class="video-overlay" id="container"> 
-    <form>
-      <br />  
-      <input
-        type="color"
-        onchange="atrament.color = event.target.value;"
-        value="#000000"
-        autocomplete="off"
-      />
-      <button id="clear" onclick="event.preventDefault(); atrament.clear();">
-        Del
-      </button> <br /> 
+  
+      <form>
+        <button id="clear" onclick="event.preventDefault(); atrament.clear();">
+          Del
+        </button>   
+        <input
+          id="adaptive"
+          type="checkbox"
+          onchange="atrament.adaptiveStroke = event.target.checked;"
+          checked
+          autocomplete="off"
+        /> <br /> 
+        <input
+          type="range"
+          min="1"
+          max="40"
+          oninput="atrament.weight = parseFloat(event.target.value);"
+          value="2"
+          step="0.1"
+          autocomplete="off"
+        /> <!--   <br /> 
+   <input
+          id="smoothing"
+          type="range"
+          min="0.1"
+          max="2"
+          onchange="atrament.smoothing = parseFloat(event.target.value);"
+          value="0.85"
+          step="0.05"
+          autocomplete="off"
+        /><br />-->  
+        <select onchange="atrament.mode = event.target.value;" autocomplete="off">
+          <option value="draw" default>Draw</option>
+          <option value="fill" default>Fill</option>
+          <option value="erase" default>Erase</option> </select
+        ><br />
+        <label>Colour</label>
+        <input
+          type="color"
+          onchange="atrament.color = event.target.value;"
+          value="#000000"
+          autocomplete="off"
+        /><br /> 
       <div class="slide-fade" id="slide-fade"></div>
       <!-- <p><a data-count="8" onclick="addElement('slide-fade',event);" class="btn btn-primary">Add</a></p> -->
     </form>
