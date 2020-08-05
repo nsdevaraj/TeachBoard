@@ -60,18 +60,18 @@ var drag = d3.behavior.drag()
   .on("drag", dragmove);
 
 function handleClick(event) {
-  draw(document.getElementById("myVal").value)
+  draw(document.getElementById("myVal").value, atrament.color)
   return false
 }
 
-function draw(val) {
+function draw(val, clr) {
   d3.select("body").select("ul").append("li");
-  dataset.push(val);
+  dataset.push([val, clr]);
   var p = d3.select("body").selectAll("li")
     .data(dataset)
     .attr("id", "draggable")
-    .style("color", atrament.color)
-    .text(function (d, i) { return d; })
+    .style("color", function (d, i) { return d[1]; })
+    .text(function (d, i) { return d[0]; })
     .call(drag)
 }
 
