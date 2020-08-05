@@ -16,14 +16,14 @@
   <div class="outer-container">
     <div class="inner-container"> <video autoplay="true" id="videoElement" /> </div>
     <div class="video-overlay" id="container">
-      <form>
+      <form><span style="font-size: small;"> Panel </span></br>
         <button id="clear"
           onclick="event.preventDefault(); var node = document.getElementById('txt'); node.innerHTML = ''; dataset=[]; atrament.clear();">
-          <span style="font-family:Webdings">q</span>
+          <span style="font-size: large; font-family:Webdings">q</span>
         </button>
-        <input id="adaptive" type="checkbox" onchange="atrament.adaptiveStroke = event.target.checked;" checked
+        <input id="adaptive" type="checkbox" onchange="atrament.adaptiveStroke = event.target.checked;" title="adaptive" checked
           autocomplete="off" /> <br />
-        <input type="range" min="1" max="40" oninput="atrament.weight = parseFloat(event.target.value);" value="2"
+        <input type="range" min="1" max="40" oninput="atrament.weight = parseFloat(event.target.value);" title="thick" value="2"
           step="0.1" autocomplete="off" />
         <select onchange="atrament.mode = event.target.value;" autocomplete="off">
           <option value="draw" default>Draw</option>
@@ -33,6 +33,7 @@
         <input type="color" onchange="atrament.color = event.target.value;" value="#000000" autocomplete="off" /><br />
         <input type="text" id="myVal" placeholder="type here" width="30">
         <button id="clear" onclick="event.preventDefault(); handleClick();">+ABC</button>
+        
       </form>
       <ul id='txt'></ul>
       <canvas id="sketcher"></canvas>

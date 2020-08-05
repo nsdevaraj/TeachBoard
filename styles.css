@@ -28,9 +28,10 @@ form {
   top: 300;
   left: 100;
   background: rgba(0, 0, 0, 0.6);
-  padding: 1em;
+  padding: 0.5em;
   color: white;
-  width: 6rem;
+  border-radius: 10px;
+  width: -4rem;
 }
 
 textarea {
