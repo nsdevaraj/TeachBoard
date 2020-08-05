@@ -1,3 +1,39 @@
+
+function addElement(elId,e) {
+  var holder = document.getElementById(elId),
+      num = e.currentTarget.dataset.count++,
+      divIdName = elId + num,
+      newdiv = document.createElement('div');
+
+  newdiv.setAttribute("id", divIdName);
+  newdiv.innerHTML = "<div class=\"drag-item\"><a href=\"javascript:;\" onclick=\"moveElement(\'" + divIdName + "\',\'" + elId + "\')\">m</a></br><a href=\"javascript:;\" onclick=\"removeElement(\'" + divIdName + "\',\'" + elId + "\')\">x</a><textarea class=\"form-control\" name=\"text" + num + "\"></textarea></div>";
+
+  holder.appendChild(newdiv);
+  setTimeout(function() {
+      newdiv.className += "show";
+  }, 10);
+}
+
+function moveElement(divNum,elId) {
+  var holder = document.getElementById(elId);
+  var olddiv = document.getElementById(divNum);
+  olddiv.className = "";
+  
+  setTimeout(function() {
+      holder.removeChild(olddiv);
+  }, 600);
+}
+
+function removeElement(divNum,elId) {
+  var holder = document.getElementById(elId);
+  var olddiv = document.getElementById(divNum);
+  olddiv.className = "";
+  
+  setTimeout(function() {
+      holder.removeChild(olddiv);
+  }, 600);
+}
+
 // first, we need to set up the canvas
 const canvas = document.getElementById('sketcher');
 canvas.style.cursor = 'crosshair';
@@ -50,4 +86,4 @@ atrament.addEventListener('strokerecorded', ({ stroke }) => {
 });  
 
 // utility to add delay to drawing steps
-const sleep = async time => new Promise((r) => setTimeout(r, time));
+const sleep = async time => new Promise((r) => setTimeout(r, time)); 

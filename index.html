@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Stream</title>
-    <script src="atrament.js"></script>
+    <script src="atrament.js"></script> 
     <script defer src="draw.js"></script>
     <style>
       canvas {
@@ -26,6 +26,20 @@
         width: 6rem;
       }
 
+      textarea {
+        background: transparent;
+        color: transparent; 
+        border: 0 none;
+        width: 100%;
+        font-size: 5em;
+        outline: none;
+        height: 100%;
+        position: absolute;
+      }
+
+      textarea:focus {
+        color: white;
+      }
       form * {
         margin-bottom: 1em;
       }
@@ -60,6 +74,12 @@
 	 	margin: 0px;
 	 	padding: 0px 0px; 
 	 }
+   link
+    {
+      color:aqua;
+      text-decoration: none; 
+      background-color: none;
+    }
 	 #videoElement {
 	 	width: 100%;
 	 	height: 100%;
@@ -91,6 +111,8 @@
       <button id="clear" onclick="event.preventDefault(); atrament.clear();">
         Del
       </button> <br /> 
+      <div class="slide-fade" id="slide-fade"></div>
+      <!-- <p><a data-count="8" onclick="addElement('slide-fade',event);" class="btn btn-primary">Add</a></p> -->
     </form>
     <canvas id="sketcher"></canvas>
 	</div>
